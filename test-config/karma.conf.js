@@ -1,15 +1,26 @@
 var webpackConfig = require('./webpack.test.js');
 
-module.exports = function(config) {
+module.exports = function (config) {
   var _config = {
     basePath: '',
 
     frameworks: ['jasmine'],
 
     files: [{
-      pattern: './karma-test-shim.js',
-      watched: true
-    }],
+        pattern: './karma-test-shim.js',
+        watched: true
+      },
+      {
+        pattern: '../src/assets/img/*.png',
+        watched: false, 
+        included: false, 
+        served: true
+      }
+    ],
+
+    proxies: {
+      '/assets/img/': '/base/src/assets/img/'
+    },
 
     preprocessors: {
       './karma-test-shim.js': ['webpack', 'sourcemap']
